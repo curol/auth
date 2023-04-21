@@ -1,5 +1,3 @@
-> The example repository is maintained from a [monorepo](https://github.com/nextauthjs/next-auth/tree/main/apps/example-nextjs). Pull Requests should be opened against [`nextauthjs/next-auth`](https://github.com/nextauthjs/next-auth).
-
 <p align="center">
    <br/>
    <a href="https://next-auth.js.org" target="_blank"><img width="150px" src="https://next-auth.js.org/img/logo/logo-sm.png" /></a>
@@ -23,6 +21,19 @@
    </p>
 </p>
 
+## What is authentication?
+
+Authentication is the process of identifying a person or entity and making sure they are who they claim to be. While this is typically a person, it can also be something like a bot account or an organization.
+
+This is commonly seen as a login form when visiting a website or application, where you provide your credentials to a service, and that service verifies they’re correct.
+
+**Callback URLs** This will be what our auth service will use to communicate with Twitter when authenticating. When developing locally, it should be the address of your server. When on production, it should be your public-facing URL.
+
+For callback urls, you can use http://<domain>/api/auth/callback/<provider>.
+I.g., http://localhost:3000/api/auth/callback/github.
+
+**Website URL** this should be the website where your application will ultimately live
+
 ## Overview
 
 NextAuth.js is a complete open source authentication solution.
@@ -30,6 +41,7 @@ NextAuth.js is a complete open source authentication solution.
 This is an example application that shows how `next-auth` is applied to a basic Next.js app.
 
 The deployed version can be found at [`next-auth-example.vercel.app`](https://next-auth-example.vercel.app)
+
 
 ### About NextAuth.js
 
