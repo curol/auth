@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  database:
+  db:
     image: mysql:latest
     container_name: mysql
     environment:
@@ -12,5 +12,13 @@ services:
       - "3306:3306"
     volumes:
       - mysql_volume:/var/lib/mysql
+    networks:
+      - bridge
+
+networks:
+  bridge:
+    external:
+      name: bridge
+
 volumes:
   mysql_compose_volume:
