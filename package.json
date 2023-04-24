@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next",
     "prebuild": "pnpm prisma:generate",
-    "build": "next build",
+    "build": "pnpm prebuild && next build",
     "start": "next start",
     "predev": "pnpm prisma:generate",
     "prisma:generate": "prisma generate",
