@@ -169,6 +169,7 @@ Go to [next-auth.js.org](https://next-auth.js.org) for more information and docu
 
 ## Getting Started
 
+
 ### 1. Clone the repository and install dependencies
 
 ```
@@ -189,7 +190,7 @@ Add details for one or more providers (e.g. Google, Twitter, GitHub, Email, etc)
 
 #### Database
 
-A database is needed to persist user accounts and to support email sign in. However, you can still use NextAuth.js for authentication without a database by using OAuth for authentication. If you do not specify a database, [JSON Web Tokens](https://jwt.io/introduction) will be enabled by default.
+Use a database to **persist** data. A database is needed to persist user accounts and to support email sign in**. However, you can still use NextAuth.js for authentication without a database by using OAuth for authentication. If you do not specify a database, [JSON Web Tokens](https://jwt.io/introduction) will be enabled by default.
 
 You **can** skip configuring a database and come back to it later if you want.
 
@@ -197,7 +198,59 @@ For more information about setting up a database, please check out the following
 
 * Docs: [next-auth.js.org/adapters/overview](https://next-auth.js.org/adapters/overview)
 
-### 3. Configure Authentication Providers
+### 3. Database (Optional, if not persisting data skip this step)
+
+1. Create SQL migration file and execute it (sync schema and database): `pnpm prisma:migrate`
+
+```bash
+/workspaces/next-auth-example dev* ❯ pnpm prisma:migrate                                 16:36:13
+
+> @ prisma:migrate:dev /workspaces/next-auth-example
+> prisma migrate dev
+
+Environment variables loaded from .env
+Prisma schema loaded from prisma/schema.prisma
+Datasource "db": MySQL database "nextauth" at "mysql:3306"
+
+✔ Enter a name for the new migration: … init
+Applying migration `20230424163951_init`
+
+The following migration(s) have been created and applied from new schema changes:
+
+migrations/
+  └─ 20230424163951_init/
+    └─ migration.sql
+
+Your database is now in sync with your schema.
+
+✔ Generated Prisma Client (4.13.0 | library) to ./node_modules/.pnpm/@prisma+client@4.13.0_prisma@4.13
+.0/node_modules/@prisma/client in 98ms
+```
+
+2. Generate Prisma client `pnpm prisma:generate`
+
+```bash
+/workspaces/next-auth-example dev* ❯ pnpm predev                                         14s 16:39:59
+
+> @ predev /workspaces/next-auth-example
+> pnpm prisma:generate
+
+
+> @ prisma:generate /workspaces/next-auth-example
+> prisma generate
+
+Environment variables loaded from .env
+Prisma schema loaded from prisma/schema.prisma
+
+✔ Generated Prisma Client (4.13.0 | library) to ./node_modules/.pnpm/@prisma+client@4.13.0_prisma@4.13.0/node_modules/@prisma/client in 112ms
+You can now start using Prisma Client in your code. Reference: https://pris.ly/d/client
+```
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
+```
+```
+
+### 4. Configure Authentication Providers
 
 1. Review and update options in `pages/api/auth/[...nextauth].js` as needed.
 
@@ -209,22 +262,28 @@ For more information about setting up a database, please check out the following
 
 3. You can also choose to specify an SMTP server for passwordless sign in via email.
 
-### 4. Start the application
+### 5. Start the application
 
 To run your site locally, use:
 
 ```
-npm run dev
+pnpm dev
+```
+
+If using database, view database, use:
+
+```
+pnpm studio
 ```
 
 To run it in production mode, use:
 
 ```
-npm run build
-npm run start
+pnpm build
+pnpm start
 ```
 
-### 5. Preparing for Production
+### 6. Preparing for Production
 
 Follow the [Deployment documentation](https://next-auth.js.org/deployment)
 

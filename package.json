@@ -7,8 +7,12 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "predev": "prisma generate",
-    "prisma:migrate": "prisma migrate deploy"
+    "predev": "pnpm prisma:generate",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:migrate:deploy": "prisma migrate deploy",
+    "prisma:push":"prisma db push",
+    "studio": "prisma studio"
   },
   "author": "Crash Curatolo <crash@curol.dev>",
   "dependencies": {

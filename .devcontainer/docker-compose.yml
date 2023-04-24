@@ -21,12 +21,30 @@ services:
     image: mysql:latest
     restart: unless-stopped
     volumes:
-      - next-auth-example-data:/var/lib/mysql
+      - next-auth-db-data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: nextauth
       MYSQL_USER: user
       MYSQL_PASSWORD: password1234
 
+    mysql-workbench:
+      image: lscr.io/linuxserver/mysql-workbench:latest
+      container_name: mysql-workbench
+      environment:
+        - PUID=1000
+        - PGID=1000
+        - TZ=Etc/UTC
+      # volumes:
+      #   - /path/to/config:/config
+      ports:
+        - 3005:3000
+        - 3006:3001
+      cap_add:
+        - IPC_LOCK
+      restart: unless-stopped
+      networks:
+        - next-auth-db
+
 volumes:
-  next-auth-example-data:
+  next-auth-db-data:
