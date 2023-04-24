@@ -17,8 +17,8 @@ services:
 
 networks:
   bridge:
-    external:
-      name: bridge
+    external: true
+    name: bridge
 
 volumes:
-  mysql_compose_volume:
+  mysql_volume:
