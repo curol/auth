@@ -5,6 +5,7 @@
   "homepage": "https://next-auth-example.curol.dev",
   "scripts": {
     "dev": "next",
+    "prebuild": "pnpm prisma:generate",
     "build": "next build",
     "start": "next start",
     "predev": "pnpm prisma:generate",
